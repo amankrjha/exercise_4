@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -50,7 +51,7 @@ module.exports = {
                 	exclude: /node_modules/
             },
             {
-                test: /\.(jpg|png)$/,
+                test: /\.(svg|png)$/,
                 use: [
                     {
                         loader: 'file-loader',
@@ -67,9 +68,21 @@ module.exports = {
     },
     plugins: [
         //extractPlugin,
+        new webpack.ProvidePlugin({
+        	"$":"jquery",
+	      	"jQuery":"jquery",
+	      	"window.jQuery":"jquery",
+	      	'global.jQuery': 'jquery'
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
         //new CleanWebpackPlugin(['dist'])
-    ]
+    ],
+    devtool: 'source-map',
+    resolve: {
+        alias: {
+            //'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
+        }
+    }
 };
