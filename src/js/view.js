@@ -111,14 +111,16 @@ function v_addBoard(getBoardDetails, board_id, updateBoard, deleteBoard, showBoa
 		if(event.keyCode === 13){
 			event.preventDefault();
 			console.log("enter called for - board id : "+board_id);
-			updateBoard(board_id, board_body_form_input.value);
-			var new_boardName = getBoardDetails(board_id).name;
-			edit_img.setAttribute("alt", "Edit "+new_boardName);
-			delete_img.setAttribute("alt", "Delete "+new_boardName);
-			board_body_h5.innerHTML = '';
-			board_body_h5.appendChild(document.createTextNode(new_boardName));
-			board_body_form.className = 'form-inline d-none';
-			board_body_h5.className = 'card-title d-block';
+			if(board_body_form_input.value){
+				updateBoard(board_id, board_body_form_input.value);
+				var new_boardName = getBoardDetails(board_id).name;
+				edit_img.setAttribute("alt", "Edit "+new_boardName);
+				delete_img.setAttribute("alt", "Delete "+new_boardName);
+				board_body_h5.innerHTML = '';
+				board_body_h5.appendChild(document.createTextNode(new_boardName));
+				board_body_form.className = 'form-inline d-none';
+				board_body_h5.className = 'card-title d-block';
+			}
 		}else if(event.keyCode === 27){
 			board_body_form.className = 'form-inline d-none';
 			board_body_h5.className = 'card-title d-block';
@@ -132,7 +134,9 @@ function v_addBoard(getBoardDetails, board_id, updateBoard, deleteBoard, showBoa
 	})
 
 	delete_button.addEventListener('click', function(){
+		
 		event.preventDefault();
+		deleteBoard(board_id);
 		board_div.remove();
 		//boardsDiv.removeChild(board_div);
 
@@ -216,13 +220,15 @@ function createCardListItem(cardName, cardId, listId, m_deleteCard, m_editCard){
 	li_body_form_input.addEventListener('keydown', function(event){
 		if(event.keyCode === 13){
 			event.preventDefault();
-			m_editCard(listId, cardId, li_body_form_input.value);
-			ul_card_li_p.innerHTML = '';
-			ul_card_li_p.appendChild(document.createTextNode(li_body_form_input.value));
-			ul_card_li_p.className = '';
-			li_body_form.className = 'form-inline d-none';	
-			span.className = "m_card_icon_span";
-			console.log("enter called for - card id : "+cardId);
+			if(li_body_form_input.value){
+				m_editCard(listId, cardId, li_body_form_input.value);
+				ul_card_li_p.innerHTML = '';
+				ul_card_li_p.appendChild(document.createTextNode(li_body_form_input.value));
+				ul_card_li_p.className = '';
+				li_body_form.className = 'form-inline d-none';	
+				span.className = "m_card_icon_span";
+				console.log("enter called for - card id : "+cardId);
+			}
 		}else if(event.keyCode === 27){
 			ul_card_li_p.className = 'mb-0';
 			li_body_form.className = 'form-inline d-none';		
@@ -363,15 +369,17 @@ function v_addList(m_getListDetails, listId, updateList, deleteList, m_addCard, 
 	list_header_form_input.addEventListener('keydown', function(event){
 		if(event.keyCode === 13){
 			event.preventDefault();
-			updateList(listId, list_header_form_input.value);
-			header_h5.innerHTML = '';
-			header_h5.appendChild(document.createTextNode(list_header_form_input.value));
+			if(list_header_form_input.value){
+				updateList(listId, list_header_form_input.value);
+				header_h5.innerHTML = '';
+				header_h5.appendChild(document.createTextNode(list_header_form_input.value));
 
-			header_h5.className = 'mb-0';
-			list_header_form.className = 'form-inline w-100  d-none';		
-			span.className = "m_card_icon_span";
+				header_h5.className = 'mb-0';
+				list_header_form.className = 'form-inline w-100  d-none';		
+				span.className = "m_card_icon_span";
 
-			console.log("enter called for - list id : "+listId);
+				console.log("enter called for - list id : "+listId);
+			}
 		}else if(event.keyCode === 27){
 
 			header_h5.className = 'mb-0';
@@ -443,12 +451,14 @@ function v_addList(m_getListDetails, listId, updateList, deleteList, m_addCard, 
 	board_body_form_input.addEventListener('keydown', function(event){
 		if(event.keyCode === 13){
 			event.preventDefault();
-			var cardId  = m_addCard(listId, board_body_form_input.value);
-			var cardDetail = m_getCard(listId, cardId)
-			var ul_card_li = createCardListItem(cardDetail.name, cardId, listId, m_deleteCard, m_editCard);
-			card_body_ul.appendChild(ul_card_li);
-			board_body_form_input.value = "";
-			console.log("enter called for - list id : "+listId);
+			if(board_body_form_input.value){
+				var cardId  = m_addCard(listId, board_body_form_input.value);
+				var cardDetail = m_getCard(listId, cardId)
+				var ul_card_li = createCardListItem(cardDetail.name, cardId, listId, m_deleteCard, m_editCard);
+				card_body_ul.appendChild(ul_card_li);
+				board_body_form_input.value = "";
+				console.log("enter called for - list id : "+listId);
+			}
 		}else if(event.keyCode === 27){
 			board_body_form.className = 'form-inline d-none';		
 			card_footer_a.className = 'd-block';

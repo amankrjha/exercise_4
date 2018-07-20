@@ -30,12 +30,14 @@ function createListKey(event){
 }
 
 function createList(){
-	var listId = m_addList(createListInput.value);
+	if(createListInput.value){
+		var listId = m_addList(createListInput.value);
 
-	v_addList(m_getListDetails, listId, updateList, deleteList, m_addCard, m_deleteCard, m_editCard, m_getCard, m_resetCards, initSort);
-	//registerIconEvent();
-	createListInput.value = '';
-	initSort();
+		v_addList(m_getListDetails, listId, updateList, deleteList, m_addCard, m_deleteCard, m_editCard, m_getCard, m_resetCards, initSort);
+		//registerIconEvent();
+		createListInput.value = '';
+		initSort();
+	}
 }
 
 function updateList(id, value){
@@ -54,12 +56,13 @@ function createBoardKey(event){
 }
 
 function createBoard(){
-	var boardId = m_addBoard(createBoardInput.value);
-
-	v_addBoard(getBoardDetails, boardId, updateBoard, deleteBoard, showBoardDetails, initSort);
-	//registerIconEvent();
-	createBoardInput.value = '';
-	initSort();
+	if(createBoardInput.value){
+		var boardId = m_addBoard(createBoardInput.value);
+		v_addBoard(getBoardDetails, boardId, updateBoard, deleteBoard, showBoardDetails, initSort);
+		//registerIconEvent();
+		createBoardInput.value = '';
+		initSort();
+	}
 }
 function getBoardDetails(boardId){
 	return m_getBoardDetails(boardId);
