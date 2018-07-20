@@ -1,5 +1,58 @@
+import 'jquery';
+
 var boards = [];
 var selectedBoard = -1;
+
+function m_loadBoards(showListOfBoards){
+	$.ajax('http://localhost:3000/boards/1', 
+	{
+	    dataType: 'json', // type of response data
+	    timeout: 500,     // timeout milliseconds
+	    success: function (data,status,xhr) {   // success callback function
+	        console.log("got response from ajax");
+	        console.log(data);
+	        boards = JSON.parse(data['data']);
+	        console.log(boards);
+	        showListOfBoards();
+	    },
+	    error: function (jqXhr, textStatus, errorMessage) { // error callback 
+	        console.log(jqXhr);
+	    }
+	});
+}
+function saveBoards(){
+	$.ajax('http://localhost:3000/boards/', {
+	    type: 'POST',  // http method
+	    async: false,
+	    data: {'data' : JSON.stringify(boards)},  // data to submit
+	    success: function (data, status, xhr) {
+	        console.log("Data saved : ");
+	        console.log(data);
+	    },
+	    error: function (jqXhr, textStatus, errorMessage) {
+	            alert('Error' + errorMessage);
+	    }
+		});
+}
+function refreshBoards(){
+
+	$.ajax('http://localhost:3000/boards/1', {
+    type: 'DELETE',  // http method
+    async: false,
+    data: JSON.stringify(boards),  // data to submit
+    success: function (data, status, xhr) {
+        console.log("Data deleted : ");
+        console.log(data);
+        saveBoards();
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            if(jqXhr.status === 404){
+            	saveBoards();
+            }
+    }
+	});
+
+}
 function m_addBoard(boardName){
 	var board_length = boards.length;
 	boards[board_length] = {
@@ -7,6 +60,7 @@ function m_addBoard(boardName){
 		position: board_length,
 		lists : []
 	}
+	refreshBoards();
 	return board_length;
 }
 
@@ -19,6 +73,7 @@ function m_rearrangeList(newOrder){
 	}
 
 	boards[selectedBoard].lists = tempList;
+	refreshBoards();
 }
 
 function m_rearrageBoards(newOrder){
@@ -30,7 +85,7 @@ function m_rearrageBoards(newOrder){
 	}
 
 	boards = tempList;	
-	console.log(JSON.stringify(boards));
+	refreshBoards();
 }
 function m_getSelectedBoardId(){
 	return selectedBoard;
@@ -54,19 +109,21 @@ function m_addList(listName){
 		position : list_length,
 		cards : []
 	};
-	console.log(boards[selectedBoard]);
+	refreshBoards();
 	return list_length;
 }
 
 function m_editList(listId, newListName){
 	console.log("m_editList is called for : "+listId);
-	boards[selectedBoard].lists[listId].name = newListName
+	boards[selectedBoard].lists[listId].name = newListName;
+	refreshBoards();
 }
 
 
 function m_deleteList(listId){
 	console.log("m_deleteList is called for : "+listId);
 	boards[selectedBoard].lists.splice(listId, 1);
+	refreshBoards();
 }
 
 function m_addCard(listId, cardName){
@@ -75,7 +132,8 @@ function m_addCard(listId, cardName){
 		name: cardName,
 		position: card_length
 	};
-	return card_length
+	refreshBoards();
+	return card_length;
 }
 
 function m_resetCards(listId){
@@ -89,18 +147,21 @@ function m_getCard(listId, cardId){
 
 function m_deleteCard(listId, cardId){
 	boards[selectedBoard].lists[listId].cards.splice(cardId, 1);	
+	refreshBoards();
 }
 
 function m_editCard(listId, cardId, newCardName){
 	console.log("m_editCard for card id "+cardId);
 	var card_length = boards[selectedBoard].lists[listId].cards.length;	
 	boards[selectedBoard].lists[listId].cards[cardId].name = newCardName;
+	refreshBoards();
 	return card_length
 }
 
 function m_deleteBoard(boardId){
 	console.log("Inside module .. deleteBoard method old length "+boards.length);
 	boards.splice(boardId, 1);
+	refreshBoards();
 	console.log("Inside module .. deleteBoard method old length "+boards.length);
 }
 
@@ -108,6 +169,7 @@ function m_updateBoard(boardId, newBoardName){
 	console.log("Inside module .. updateBoard method old value ");
 	console.log(boards[boardId]);
 	boards[boardId].name = newBoardName;
+	refreshBoards();
 	console.log("Inside module .. updateBoard method new Value value ");
 	console.log(boards[boardId]);
 }
@@ -126,4 +188,4 @@ function m_getBoards(){
 export{m_addBoard, m_deleteBoard, m_updateBoard, m_getBoardDetails, 
 	m_getSelectedBoardId, m_setSelectedBoardId, m_getListDetails,
 	m_editList, m_deleteList, m_addList, m_addCard,
-	m_deleteCard, m_editCard, m_getCard, m_resetCards, m_rearrangeList, m_rearrageBoards, m_getBoards};
+	m_deleteCard, m_editCard, m_getCard, m_resetCards, m_rearrangeList, m_rearrageBoards, m_getBoards, m_loadBoards};

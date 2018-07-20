@@ -3,7 +3,7 @@ import 'jquery-ui';
 var sortable = require('jquery-ui/ui/widgets/sortable');
 require('jquery-ui/ui/disable-selection');
 
-import {m_addBoard, m_deleteBoard, m_updateBoard, m_getBoardDetails, m_getSelectedBoardId, m_setSelectedBoardId, m_getListDetails, m_editList, m_deleteList, m_addList, m_addCard, m_deleteCard, m_editCard, m_getCard, m_resetCards, m_rearrangeList, m_rearrageBoards, m_getBoards} from './model.js';
+import {m_addBoard, m_deleteBoard, m_updateBoard, m_getBoardDetails, m_getSelectedBoardId, m_setSelectedBoardId, m_getListDetails, m_editList, m_deleteList, m_addList, m_addCard, m_deleteCard, m_editCard, m_getCard, m_resetCards, m_rearrangeList, m_rearrageBoards, m_getBoards, m_loadBoards} from './model.js';
 import {v_addBoard, v_showBoardDetails, v_showListBoards, v_addList} from './view.js';
 
 var createBoardButton = document.getElementById("createBoardBtn");
@@ -154,4 +154,7 @@ function initSort(){
 			}
 		});
 }
+$(window).on('load', function(){
+m_loadBoards(showListOfBoards);	
 initSort();
+});
