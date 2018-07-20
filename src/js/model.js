@@ -16,7 +16,10 @@ function m_loadBoards(showListOfBoards){
 	        showListOfBoards();
 	    },
 	    error: function (jqXhr, textStatus, errorMessage) { // error callback 
-	        console.log(jqXhr);
+	        if(jqXhr.status !== 404){
+            	alert(errorMessage);
+            }
+	        
 	    }
 	});
 }
