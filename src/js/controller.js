@@ -6,19 +6,26 @@ require('jquery-ui/ui/disable-selection');
 import {m_addBoard, m_deleteBoard, m_updateBoard, m_getBoardDetails, m_getSelectedBoardId, m_setSelectedBoardId, m_getListDetails, m_editList, m_deleteList, m_addList, m_addCard, m_deleteCard, m_editCard, m_getCard, m_resetCards, m_rearrangeList, m_rearrageBoards, m_getBoards, m_loadBoards} from './model.js';
 import {v_addBoard, v_showBoardDetails, v_showListBoards, v_addList} from './view.js';
 
+
+$('#trelloNavBar').on('click', '#createBoardBtn', createBoard);
+$('#trelloNavBar').on('keydown', '#createBoardInput', createBoardKey);
+$('#trelloNavBar').on('click', '#createListBtn', createList);
+$('#trelloNavBar').on('keydown', '#createListInput', createListKey);
+
 var createBoardButton = document.getElementById("createBoardBtn");
 var createBoardInput = document.getElementById("createBoardInput");
 var myTrelloLogo = document.getElementById('myTrelloLogo');
 var createListInput = document.getElementById('createListInput');
 var createListBtn = document.getElementById('createListBtn');
 
+/*
 createBoardButton.addEventListener('click', createBoard);
 createBoardInput.addEventListener('keydown', createBoardKey);
 
 createListBtn.addEventListener('click', createList);
 createListInput.addEventListener('keydown', createListKey);
-
-myTrelloLogo.addEventListener('click', showListOfBoards);
+*/
+//myTrelloLogo.addEventListener('click', showListOfBoards);
 
 
 function createListKey(event){

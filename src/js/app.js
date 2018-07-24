@@ -11,12 +11,13 @@ import 'jquery';
 import 'jquery-ui';
 var sortable = require('jquery-ui/ui/widgets/sortable');
 require('jquery-ui/ui/disable-selection');
+import './nav/view';
+import './nav/controller';
 import './controller';
 import './model';
 import './view';
 
 console.log("I am ready");
 
-var boardsDiv = $("#boardList");
 
 //console.log(boardsDiv.sortable())

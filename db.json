@@ -1,7 +1,7 @@
 {
   "boards": [
     {
-      "data": "[{\"name\":\"Overview\",\"position\":0,\"lists\":[{\"name\":\"Course Overview\",\"position\":0,\"cards\":[{\"name\":\"Week 1\",\"position\":0},{\"name\":\"Week 2\",\"position\":1},{\"name\":\"Week 3\",\"position\":2},{\"name\":\"Week 4\",\"position\":3},{\"name\":\"Week 5\",\"position\":4},{\"name\":\"Week 6\",\"position\":5}]},{\"name\":\"ENV Setup\",\"position\":1,\"cards\":[{\"name\":\"VM Download\",\"position\":0},{\"name\":\"Vagrant download\",\"position\":1},{\"name\":\"Change Vagrant file\",\"position\":2}]}]},{\"name\":\"HTML 5\",\"position\":1,\"lists\":[{\"name\":\"Vedios\",\"position\":0,\"cards\":[{\"name\":\"First set videos\",\"position\":0},{\"name\":\"Second set videos\",\"position\":1},{\"name\":\"Semantics Videos\",\"position\":2}]},{\"name\":\"Exercises\",\"position\":1,\"cards\":[{\"name\":\"Exercise 1\",\"position\":0},{\"name\":\"Exercise 2\",\"position\":1}]}]}]",
+      "data": "[{\"name\":\"aman\",\"position\":0,\"lists\":[]},{\"name\":\"aman jha\",\"position\":1,\"lists\":[]}]",
       "id": 1
     }
   ]
