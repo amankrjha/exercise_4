@@ -14,15 +14,15 @@ class NavHeader{
 		    <button class="btn my-2 my-sm-0" type="button" id="createBoardBtn">Create</button>
 		  </form>`;
 	   
-	   this.addListForm = `<form class="form-inline d-none" id="createList">
+	   this.addListForm = `<form class="form-inline" id="createList">
 		    <input class="form-control mr-2" type="create" placeholder="List name" aria-label="List Name" id="createListInput">
 		    <button class="btn my-2 my-sm-0" type="button" id="createListBtn">Create</button>
 		  </form>`
 
 	}
 
-	createBoardHeader(boarName){
-		return this.createDOMElement(this.boardHeader = `<div class="col d-none justify-content-center mb-3 mb-md-0" id="boardHeaderLabel">
+	createBoardHeader(boardName){
+		return this.createDOMElement(this.boardHeader = `<div class="col justify-content-center mb-3 mb-md-0" id="boardHeaderLabel">
 		  <h4 class="navbar-brand" id="boardHeaderName">${boardName}</h4>
 	   </div>`);
 	}

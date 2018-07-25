@@ -15,6 +15,8 @@ import './nav/view';
 import './nav/controller';
 import './board/view';
 import './board/controller';
+import './list/view';
+import './list/controller';
 import './controller';
 import './model';
 import './view';

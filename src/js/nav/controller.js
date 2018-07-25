@@ -7,12 +7,13 @@ $('#trelloNavBar').on('click', '#createBoardBtn', createBoard);
 $('#trelloNavBar').on('keydown', '#createBoardInput', createBoardKey);
 $('#trelloNavBar').on('click', '#createListBtn', createList);
 $('#trelloNavBar').on('keydown', '#createListInput', createListKey);
+$('#trelloNavBar').on('click', '#myTrelloLogo', showBoardList);
 
-var myTrelloLogo = document.getElementById('myTrelloLogo');
 
-myTrelloLogo.addEventListener('click', function(event){
+
+function showBoardList(event){
 	store.dispatch({type: 'SHOW_BOARDS'});
-});
+}
 
 function createBoardKey(event){
 	if(event.keyCode === 13){
@@ -46,8 +47,10 @@ function createList(){
 }
 
 function render(){
+	console.log("In nav controller ");
 	let state = store.getState();
 	if(state.selectedBoardId >= 0){
+		console.log(state.boards[state.selectedBoardId]);
 		nav.showNavForBoardDetails(state.boards[state.selectedBoardId].name);
 	}else{
 		nav.showNavForBoardList();

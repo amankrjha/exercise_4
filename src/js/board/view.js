@@ -22,9 +22,9 @@ class Boards{
 			</div>
 			<div class="card-body pt-1" board-id="${boardId}">
 				<a href="#" board-id="${boardId}">
-					<h5 class="card-title">${boardName}</h5>
+					<h5 class="card-title" board-id="${boardId}">${boardName}</h5>
 				</a>
-				<form class="form-inline d-none"><input class="form-control w-100" board-id="${boardId}"></form>
+				<form class="form-inline d-none"><input class="form-control w-100" board-id="${boardId}" value="${boardName}"></form>
 			</div>
 		</div>`);
 	}
@@ -49,6 +49,8 @@ class Boards{
 		a.classList.add('d-none');
 		const form = this.parent.querySelector(`div[board-id="${boardId}"].card-body form`);
 		form.classList.remove('d-none');
+		const formInput = this.parent.querySelector(`div[board-id="${boardId}"].card-body input`);
+		formInput.focus();
 		console.log(a);
 		console.log(form);
 	}
