@@ -32,8 +32,8 @@ class ListBox{
 			</div>
 			<div class="card-footer" list-id="${listId}">
 				<a href="#" list-id="${listId}">Add a Card</a>
-				<form class="form-inline newCard d-none" list-id="${listId}">
-					<input class="form-control w-100" list-id="${listId}">
+				<form class="form-inline d-none" list-id="${listId}">
+					<input class="form-control newCard w-100" list-id="${listId}">
 				</form>
 			</div>
 		</div>`);
@@ -81,7 +81,7 @@ class ListBox{
 			let listDom = this.creatList(listItem.name, listIndex);
 			this.parent.appendChild(listDom);
 
-			listItem.cards.forEach(function(cardItem, cardIndex){
+			listItem.cards.forEach((cardItem, cardIndex) => {
 				let cardDom = this.createCard(cardItem.name, cardIndex, listIndex);
 				listDom.appendChild(cardDom);
 			});
@@ -116,6 +116,7 @@ class ListBox{
 		const form = this.parent.querySelector(`div[list-id="${listId}"].card-footer form`);
 		form.classList.remove('d-none');
 		const formInput = this.parent.querySelector(`div[list-id="${listId}"].card-footer input`);
+		formInput.value = "";
 		formInput.focus();
 	}
 	hideAddCards(listId){

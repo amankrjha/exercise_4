@@ -10,7 +10,7 @@ import store from '../state';
 $('#boardList').on('click', '.boardEditIcon', showBoardEdit);
 $('#boardList').on('click', '.boardDeleteIcon', deleteBoard);
 $('#boardList').on('keydown', 'input.form-control', updateBoardDetail);
-$('#boardList').on('focusout', 'input.form-control', updateBoardDetail);
+$('#boardList').on('focusout', 'input.form-control', hideBoardEditForm);
 $('#boardList').on('click', 'a', showBoardDetails);
 
 function showBoardDetails(event){
@@ -34,11 +34,13 @@ function hideBoardEditForm(event){
 
 function updateBoardDetail(event){
 	if(event.keyCode === 13){	
+		event.preventDefault();
 		store.dispatch({
 			type: 'UPDT_BOARD', 
 			name: event.target.value, 
 			boardId: event.target.getAttribute('board-id')
 		});
+		return false;
 	}else if(event.keyCode === 27){
 		boardsView.hideBoardEditForm(event.target.getAttribute('board-id'));
 	}

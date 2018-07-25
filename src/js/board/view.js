@@ -56,7 +56,7 @@ class Boards{
 	}
 
 	hideBoardEditForm(boardId){
-		console.log("I am inside show Board Edit Form");
+		console.log("I am inside hide Board Edit Form");
 		console.log(boardId);
 		const a = this.parent.querySelector(`div[board-id="${boardId}"].card-body a`);
 		a.classList.remove('d-none');

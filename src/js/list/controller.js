@@ -36,6 +36,7 @@ function hideEditCard(event){
 }
 function updateCard(event){
 	if(event.keyCode === 13){	
+		event.preventDefault();
 		console.log("in controller updateCard enter");
 		let listId = event.target.getAttribute('list-id');
 		let cardId = event.target.getAttribute('card-id');
@@ -45,12 +46,13 @@ function updateCard(event){
 				listId: listId,
 				cardId: cardId
 			});
-
+		return false;
 	}else if(event.keyCode === 27){
 		let listId = event.target.getAttribute('list-id');
 		let cardId = event.target.getAttribute('card-id');
 		listBox.hideEditCard(listId, cardId);
 	}
+	
 
 }
 function deleteCard(event){
@@ -66,12 +68,14 @@ function deleteCard(event){
 }
 function addNewCard(event){
 	if(event.keyCode === 13){	
+		event.preventDefault();
 		console.log("in controller addNewCard enter");
 		store.dispatch({
 				type: 'ADD_CARD', 
 				name: event.target.value, 
 				listId: event.target.getAttribute('list-id')
 			});
+		return false;
 	}else if(event.keyCode === 27){
 		console.log("in controller addNewCard escape");
 		listBox.hideAddCards(event.target.getAttribute('list-id'));
@@ -86,13 +90,16 @@ function hideAddCards(event){
 }
 
 function updateListDetails(event){
+	console.log(event.target.value);
 	if(event.keyCode === 13){	
 		console.log("in controller updateListDetails enter");
+		event.preventDefault();
 		store.dispatch({
-			type: 'UPDT_BOARD', 
+			type: 'UPDT_LIST', 
 			name: event.target.value, 
-			boardId: event.target.getAttribute('board-id')
+			listId: event.target.getAttribute('list-id')
 		});
+		return false;
 	}else if(event.keyCode === 27){
 		console.log("in controller updateListDetails escape");
 		listBox.hideListEditForm(event.target.getAttribute('list-id'));
@@ -105,7 +112,7 @@ function hideListEdit(event){
 function showListEdit(event){
 	console.log("controller - showListEdit");
 	console.log(event);
-	listBox.showListEditForm(event.current.getAttribute('list-id'));
+	listBox.showListEditForm(event.target.getAttribute('list-id'));
 }
 function deleteList(event){
 	console.log("controller - deleteList(event)");

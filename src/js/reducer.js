@@ -235,6 +235,7 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			return newState;
 			break;
 		case 'UPDT_LIST': 
+			console.log("In reducer - UPD_LIST");
 			listName = action.name;
 			boardId = currentState.selectedBoardId;
 			let listId = action.listId;
@@ -271,6 +272,10 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			// 	newState.boards[currIndex].lists = tempList;	
 				
 			// });
+			console.log(action);
+			console.log(currentState);
+			console.log(newState);
+			console.log(newState.boards[boardId]);
 			newState.boards[boardId].lists[listId].name = listName;
 			return newState;
 			break;
@@ -310,8 +315,11 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			return newState;
 			break;
 		case 'ADD_CARD':
+			console.log("in reducer - ADD_CARD");
+			console.log(action);
+			console.log(currentState);
 			boardId = currentState.selectedBoardId;
-			listId = action.listid;
+			listId = action.listId;
 			let cardName = action.name;
 
 			// newState = {};
@@ -345,6 +353,7 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			// 	newState.boards[currIndex].lists = tempList;	
 				
 			// });
+			console.log(newState);
 			newState.boards[boardId].lists[listId].cards[newState.boards[boardId].lists[listId].cards.length] = {
 				name : cardName
 			};
