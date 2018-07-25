@@ -83,7 +83,7 @@ class ListBox{
 
 			listItem.cards.forEach((cardItem, cardIndex) => {
 				let cardDom = this.createCard(cardItem.name, cardIndex, listIndex);
-				listDom.appendChild(cardDom);
+				listDom.getElementsByTagName('ul')[0].appendChild(cardDom);
 			});
 
 		});

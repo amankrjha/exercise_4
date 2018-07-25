@@ -10,9 +10,11 @@ $('#boardDetails').on('click', '.listEditIcon', showListEdit);
 $('#boardDetails').on('click', '.listDeleteIcon', deleteList);
 $('#boardDetails').on('keydown', 'input.listInput', updateListDetails);
 $('#boardDetails').on('focusout', 'input.listInput', hideListEdit);
+
 $('#boardDetails').on('click', 'div.card-footer a', showAddCards);
 $('#boardDetails').on('focusout', 'input.newCard', hideAddCards);
 $('#boardDetails').on('keydown', 'input.newCard', addNewCard);
+
 $('#boardDetails').on('click', '.cardEditIcon', showEditCard);
 $('#boardDetails').on('focusout', 'input.cardInput', hideEditCard);
 $('#boardDetails').on('click', '.cardDeleteIcon', deleteCard);
@@ -119,7 +121,7 @@ function deleteList(event){
 	console.log(event);
 	store.dispatch({
 				type: 'DEL_LIST', 
-				order: event.target.getAttribute('list-id')
+				listId: event.target.getAttribute('list-id')
 			});
 
 }

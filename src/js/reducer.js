@@ -280,7 +280,10 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			return newState;
 			break;
 		case 'DEL_LIST':
-			listId = action.listid;
+			console.log("in reducer - DEL_LIST");
+			console.log(action);
+			console.log(currentState);
+			listId = action.listId;
 			boardId = currentState.selectedBoardId;
 
 			// newState = {};
@@ -362,7 +365,7 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			break;
 		case 'RESET_LIST':
 			boardId = currentState.selectedBoardId;
-			listId = action.listid;
+			listId = action.listId;
 			let cardList = action.cards;
 			newState.boards[boardId].lists[listId].cards = [];
 			cardList.forEach((card) => {
@@ -411,9 +414,12 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			return newState;
 			break;
 		case 'UPDT_CARD':
+			console.log("in reducer - UPDT_CARD");
+			console.log(action);
+			console.log(currentState);
 			boardId = currentState.selectedBoardId;
 			listId = action.listId;
-			cardId = action.cardId;
+			let cardId = action.cardId;
 			let newCardName = action.name;
 
 			// newState = {};
