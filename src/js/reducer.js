@@ -10,17 +10,25 @@ function getCopyCurrentState(currentState){
 	newState.boards = []
 	currentState.boards.forEach(function(board){
 		const currIndex = newState.boards.length;
-		newState.boards[currIndex].name = board.name;
+		newState.boards[currIndex] = {
+			name: board.name,
+			lists: []
+		};
 		
 		const tempList = []
 		board.lists.forEach(function(list){
 			const currListIndex = tempList.length;
-			tempList[currListIndex].name = list.name;
+			tempList[currListIndex] = {
+				name: list.name,
+				cards: []
+			};
 
 			const cardsList = [];
 
 			list.cards.forEach(function(card){
-				cardsList[cardsList.length].name = card.name;
+				cardsList[cardsList.length] = {
+					name: card.name
+				};
 			});
 
 			tempList[currListIndex].cards = cardsList;
@@ -66,8 +74,10 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			});
 
 			let boardLength = newState.boards.length;
-			newState.boards[boardLength].name = boardName;
-			newState.boards[boardLength].lists = [];
+			newState.boards[boardLength] = {
+				name : boardName,
+				lists : []
+			};
 			return newState;
 			break;
 		case 'DEL_BOARD':
@@ -103,6 +113,8 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			return newState;
 			break;
 		case 'UPDT_BOARD':
+			console.log("In reducer updating board name");
+			console.log(action);
 			boardId = action.boardId;
 			let newBoarName = action.name;
 
@@ -112,11 +124,17 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 			currentState.boards.forEach(function(board, index){
 
 				let currIndex = newState.boards.length;
-
-				if(index === boardId){
-					newState.boards[currIndex].name = newBoarName;
+				console.log("index = "+index);
+				console.log("boardId = "+boardId);
+				
+				if(index == boardId){
+					newState.boards[currIndex] = {
+						name: newBoarName
+					};
 				}else{
-					newState.boards[currIndex].name = board.name;
+					newState.boards[currIndex] = {
+						name: board.name
+					}
 				}
 
 				let tempList = []
@@ -253,7 +271,7 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 		case 'ADD_CARD':
 			boardId = action.boardId;
 			listId = action.listid;
-			let cardName = action.cardName;
+			let cardName = action.name;
 
 			newState = {};
 			newState.selectedBoardId = currentState.selectedBoardId;
@@ -277,7 +295,7 @@ const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action)
 					});
 
 					if(boardId === bIndex  && listId === lIndex){
-						cardsList[cardsList.length].name = cardName;							
+						cardsList[cardsList.length] = {name : cardName};
 					}
 
 					tempList[currListIndex].cards = cardsList;

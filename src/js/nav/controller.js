@@ -23,15 +23,23 @@ function createBoardKey(event){
 }
 
 function createBoard(){
-	let createBoardInput = document.getElementById('#createBoardInput');
+	let createBoardInput = document.getElementById('createBoardInput');
 	if(createBoardInput.value){
 		store.dispatch({type: 'ADD_BOARD', name: createBoardInput.value});
 	}
 	
 }
 
+function createListKey(event){
+	if(event.keyCode === 13){
+		event.preventDefault();
+		createList();
+		return false;
+	}
+}
+
 function createList(){
-	let createListInput = document.getElementById('#createListInput');
+	let createListInput = document.getElementById('createListInput');
 	if(createListInput.value){
 		store.dispatch({type: 'ADD_LIST', name: createListInput.value});	
 	}

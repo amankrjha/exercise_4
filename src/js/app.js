@@ -13,6 +13,8 @@ var sortable = require('jquery-ui/ui/widgets/sortable');
 require('jquery-ui/ui/disable-selection');
 import './nav/view';
 import './nav/controller';
+import './board/view';
+import './board/controller';
 import './controller';
 import './model';
 import './view';

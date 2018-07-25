@@ -32,11 +32,13 @@ class NavHeader{
 		  return template.content.firstElementChild;
 	}
 	showNavForBoardList(){
+		this.parent.innerHTML = "";
 		this.parent.appendChild(this.createDOMElement(this.trelloLogo));
 		const headerForm = this.createDOMElement(this.headerForm).appendChild(this.createDOMElement(this.addBoardForm));
 		this.parent.appendChild(headerForm);
 	}
 	showNavForBoardDetails(boardName){
+		this.parent.innerHTML = "";
 		this.parent.appendChild(this.createDOMElement(this.trelloLogo));
 		this.parent.appendChild(this.createBoardHeader(boardName));
 		const headerForm = this.createDOMElement(this.headerForm).appendChild(this.createDOMElement(this.addListForm));
