@@ -1,3 +1,4 @@
+import store from './state';
 import 'jquery';
 function loadBoards(){
 	$.ajax('http://localhost:3000/boards/1', 
@@ -7,20 +8,28 @@ function loadBoards(){
 	    success: function (data,status,xhr) {   // success callback function
 	        console.log("got response from ajax");
 	        console.log(data);
-	        boards = JSON.parse(data['data']);
+	        let boards = JSON.parse(data['data']);
 	        console.log(boards);
-	        return boards;
+	        store.dispatch({
+				type: 'LOAD_DATA', 
+				data: boards
+			});
 	    },
 	    error: function (jqXhr, textStatus, errorMessage) { // error callback 
 	        if(jqXhr.status !== 404){
             	alert(errorMessage);
+            }else{
+          		store.dispatch({
+					type: 'LOAD_DATA', 
+					data: []
+				});  	
             }
 	        
 	    }
 	});
 }
 
-function saveBoardsData(){
+function saveBoardsData(boards){
 	$.ajax('http://localhost:3000/boards/', {
 	    type: 'POST',  // http method
 	    async: false,
@@ -43,7 +52,7 @@ function saveBoards(boards){
     success: function (data, status, xhr) {
         console.log("Data deleted : ");
         console.log(data);
-        saveBoardsData();
+        saveBoardsData(boards);
     },
     error: function (jqXhr, textStatus, errorMessage) {
             if(jqXhr.status === 404){
@@ -53,5 +62,10 @@ function saveBoards(boards){
 	});
 
 }
-
+function saveData(){
+	let state = store.getState();
+	saveBoards(state.boards)
+}
+store.subscribe(saveData);
+loadBoards();
 export {loadBoards, saveBoards}

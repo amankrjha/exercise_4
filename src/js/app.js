@@ -17,9 +17,10 @@ import './board/view';
 import './board/controller';
 import './list/view';
 import './list/controller';
-import './controller';
-import './model';
-import './view';
+import './service';
+//import './controller';
+//import './model';
+//import './view';
 
 console.log("I am ready");
 

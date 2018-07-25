@@ -42,6 +42,13 @@ function getCopyCurrentState(currentState){
 const reducer = function(currentState={selectedBoardId:-999, boards:[]}, action){
 	const newState = getCopyCurrentState(currentState);
 	switch(action.type){
+		case 'LOAD_DATA':
+			console.log("in reducer load data");
+			console.log(action);
+			newState.selectedBoardId = -99;
+			newState.boards = action.data;
+			return newState;
+			break;
 		case 'SHOW_BOARDS':
 			console.log("In reducer");
 			//let newState = getCopyCurrentState(currentState);
