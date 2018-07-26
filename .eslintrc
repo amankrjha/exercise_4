@@ -3,7 +3,7 @@
   "env": {
     “node”: true,
     “browser”: true,
-  }
+  },
   "parserOptions": {
       ecmaVersion: 6,
       ecmaFeatures: {
@@ -11,4 +11,7 @@
       },
       sourceType: "module"
   },
+  "rules": {
+        "indent": ["error","tab"],       
+  }
 }

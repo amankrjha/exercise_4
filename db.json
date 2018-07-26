@@ -1,7 +1,7 @@
 {
   "boards": [
     {
-      "data": "[{\"name\":\"board 1\",\"lists\":[]},{\"name\":\"board 2\",\"lists\":[{\"name\":\"task 1\",\"cards\":[{\"name\":\"card 1 1\"}]},{\"name\":\"task 2\",\"cards\":[{\"name\":\"card 2\"}]},{\"name\":\"task 3\",\"cards\":[{\"name\":\"card 3\"}]}]}]",
+      "data": "[{\"name\":\"board 2\",\"lists\":[{\"name\":\"task 1\",\"cards\":[{\"name\":\"card 1 1\"}]},{\"name\":\"task 3\",\"cards\":[{\"name\":\"card 3\"}]},{\"name\":\"task 2\",\"cards\":[{\"name\":\"card 2\"},{\"name\":\"card 2-2\"}]}]},{\"name\":\"board 1\",\"lists\":[{\"name\":\"test 1\",\"cards\":[{\"name\":\"q 2\"}]},{\"name\":\"test 3\",\"cards\":[{\"name\":\"q 1\"}]}]}]",
       "id": 1
     }
   ]

@@ -1,17 +1,16 @@
-class ListBox{
+class ListBox {
+  constructor() {
+    this.parent = document.getElementById('boardDetails');
+  }
 
-	constructor(){
-		this.parent = document.getElementById("boardDetails");
-	}
+  createDOMElement(html) {
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    return template.content.firstElementChild;
+  }
 
-	createDOMElement(html) {
-		  const template = document.createElement('template');
-		  template.innerHTML = html;
-		  return template.content.firstElementChild;
-	}
-
-	creatList(listName, listId){
-		return this.createDOMElement(`<div class="card m_listBox" list-id="${listId}">
+  creatList(listName, listId) {
+    return this.createDOMElement(`<div class="card m_listBox" list-id="${listId}">
 			<div class="card-header d-flex justify-content-between" list-id="${listId}">
 				<h5>${listName}</h5>
 				<form class="form-inline d-none" list-id="${listId}">
@@ -37,10 +36,10 @@ class ListBox{
 				</form>
 			</div>
 		</div>`);
-	}
+  }
 
-	createCard(cardName, cardId, listId){
-		return this.createDOMElement(`<li class="d-flex flex-row card-detail justify-content-between m_card rounded" card-id="${cardId}" list-id="${listId}">
+  createCard(cardName, cardId, listId) {
+    return this.createDOMElement(`<li class="d-flex flex-row card-detail justify-content-between m_card rounded" card-id="${cardId}" list-id="${listId}">
 			<p class="mb-0">${cardName}</p>
 			<form class="form-inline d-none">
 				<input class="form-control cardInput w-100" card-id="${cardId}" list-id="${listId}" value="${cardName}">
@@ -54,98 +53,102 @@ class ListBox{
 				</button>
 			</span>
 		</li>`);
-	}
+  }
 
-	showEditCard(listId, cardId){
-		const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
-		a.classList.add('d-none');
-		const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
-		form.classList.remove('d-none');
-		const formInput = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail input`);
-		formInput.focus();
-		console.log(a);
-		console.log(form);
-	}
+  /*
+  showEditCard(listId, cardId) {
+    const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
+    a.classList.add('d-none');
+    const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
+    form.classList.remove('d-none');
+    const formInput = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail input`);
+    formInput.focus();
+    //console.log(a);
+    //console.log(form);
+  }
 
-	hideEditCard(listId, cardId){
-		const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
-		a.classList.remove('d-none');
-		const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
-		form.classList.add('d-none');
-	}
-	showLists(lists){
-		this.parent.className = 'd-flex flex-column flex-md-row';
-		this.parent.innerHTML = '';
+  hideEditCard(listId, cardId) {
+    const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
+    a.classList.remove('d-none');
+    const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
+    form.classList.add('d-none');
+  } */
 
-		lists.forEach((listItem, listIndex) => {
-			let listDom = this.creatList(listItem.name, listIndex);
-			this.parent.appendChild(listDom);
+  showLists(lists) {
+    this.parent.className = 'd-flex flex-column flex-md-row';
+    this.parent.innerHTML = '';
 
-			listItem.cards.forEach((cardItem, cardIndex) => {
-				let cardDom = this.createCard(cardItem.name, cardIndex, listIndex);
-				listDom.getElementsByTagName('ul')[0].appendChild(cardDom);
-			});
+    lists.forEach((listItem, listIndex) => {
+      const listDom = this.creatList(listItem.name, listIndex);
+      this.parent.appendChild(listDom);
 
-		});
-	}
-	hideLists(){
-		this.parent.className = 'd-none';
-	}
-	
-	showListEditForm(listId){
-		const a = this.parent.querySelector(`div[list-id="${listId}"].card-header h5`);
-		a.classList.add('d-none');
-		const form = this.parent.querySelector(`div[list-id="${listId}"].card-header form`);
-		form.classList.remove('d-none');
-		const formInput = this.parent.querySelector(`div[list-id="${listId}"].card-header input`);
-		formInput.focus();
-		console.log(a);
-		console.log(form);
-	}
+      listItem.cards.forEach((cardItem, cardIndex) => {
+        const cardDom = this.createCard(cardItem.name, cardIndex, listIndex);
+        listDom.getElementsByTagName('ul')[0].appendChild(cardDom);
+      });
+    });
+  }
 
-	hideListEditForm(listId){
-		const a = this.parent.querySelector(`div[list-id="${listId}"].card-header h5`);
-		a.classList.remove('d-none');
-		const form = this.parent.querySelector(`div[list-id="${listId}"].card-header form`);
-		form.classList.add('d-none');
-	}
-	showAddCards(listId){
-		console.log("In list view showAddCards");
-		const a = this.parent.querySelector(`div[list-id="${listId}"].card-footer a`);
-		a.classList.add('d-none');
-		const form = this.parent.querySelector(`div[list-id="${listId}"].card-footer form`);
-		form.classList.remove('d-none');
-		const formInput = this.parent.querySelector(`div[list-id="${listId}"].card-footer input`);
-		formInput.value = "";
-		formInput.focus();
-	}
-	hideAddCards(listId){
-		console.log("In list view hideAddCards");
-		const a = this.parent.querySelector(`div[list-id="${listId}"].card-footer a`);
-		a.classList.remove('d-none');
-		const form = this.parent.querySelector(`div[list-id="${listId}"].card-footer form`);
-		form.classList.add('d-none');	
-	}
+  hideLists() {
+    this.parent.className = 'd-none';
+  }
 
-	showEditCard(listId, cardId){
-		console.log("In list view showEditCards");
-		const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
-		a.classList.add('d-none');
-		const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
-		form.classList.remove('d-none');
-		const formInput = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail input`);
-		formInput.focus();
-		console.log(a);
-		console.log(form);
-	}
+  showListEditForm(listId) {
+    const a = this.parent.querySelector(`div[list-id="${listId}"].card-header h5`);
+    a.classList.add('d-none');
+    const form = this.parent.querySelector(`div[list-id="${listId}"].card-header form`);
+    form.classList.remove('d-none');
+    const formInput = this.parent.querySelector(`div[list-id="${listId}"].card-header input`);
+    formInput.focus();
+    // console.log(a);
+    // console.log(form);
+  }
 
-	hideEditCard(listId, cardId){
-		console.log("In list view hideEditCard");
-		const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
-		a.classList.remove('d-none');
-		const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
-		form.classList.add('d-none');
-	}
+  hideListEditForm(listId) {
+    const a = this.parent.querySelector(`div[list-id="${listId}"].card-header h5`);
+    a.classList.remove('d-none');
+    const form = this.parent.querySelector(`div[list-id="${listId}"].card-header form`);
+    form.classList.add('d-none');
+  }
+
+  showAddCards(listId) {
+    // console.log('In list view showAddCards');
+    const a = this.parent.querySelector(`div[list-id="${listId}"].card-footer a`);
+    a.classList.add('d-none');
+    const form = this.parent.querySelector(`div[list-id="${listId}"].card-footer form`);
+    form.classList.remove('d-none');
+    const formInput = this.parent.querySelector(`div[list-id="${listId}"].card-footer input`);
+    formInput.value = '';
+    formInput.focus();
+  }
+
+  hideAddCards(listId) {
+    // console.log('In list view hideAddCards');
+    const a = this.parent.querySelector(`div[list-id="${listId}"].card-footer a`);
+    a.classList.remove('d-none');
+    const form = this.parent.querySelector(`div[list-id="${listId}"].card-footer form`);
+    form.classList.add('d-none');
+  }
+
+  showEditCard(listId, cardId) {
+    // console.log('In list view showEditCards');
+    const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
+    a.classList.add('d-none');
+    const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
+    form.classList.remove('d-none');
+    const formInput = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail input`);
+    formInput.focus();
+    // console.log(a);
+    // console.log(form);
+  }
+
+  hideEditCard(listId, cardId) {
+    // console.log('In list view hideEditCard');
+    const a = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail p`);
+    a.classList.remove('d-none');
+    const form = this.parent.querySelector(`li[list-id="${listId}"][card-id="${cardId}"].card-detail form`);
+    form.classList.add('d-none');
+  }
 }
 
 const listBox = new ListBox();

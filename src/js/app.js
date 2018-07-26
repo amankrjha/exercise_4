@@ -9,8 +9,6 @@ import '../img/social-1_logo-instagram.svg';
 import 'bootstrap';
 import 'jquery';
 import 'jquery-ui';
-var sortable = require('jquery-ui/ui/widgets/sortable');
-require('jquery-ui/ui/disable-selection');
 import './nav/view';
 import './nav/controller';
 import './board/view';
@@ -18,11 +16,14 @@ import './board/controller';
 import './list/view';
 import './list/controller';
 import './service';
-//import './controller';
-//import './model';
-//import './view';
 
-console.log("I am ready");
+// const sortable = require('jquery-ui/ui/widgets/sortable');
+// require('jquery-ui/ui/disable-selection');
+// import './controller';
+// import './model';
+// import './view';
+
+// console.log('I am ready');
 
 
-//console.log(boardsDiv.sortable())
+// console.log(boardsDiv.sortable())
