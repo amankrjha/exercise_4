@@ -7,13 +7,6 @@ import store from '../state';
 const sortable = require('jquery-ui/ui/widgets/sortable');
 require('jquery-ui/ui/disable-selection');
 
-
-$('#boardList').on('click', '.boardEditIcon', showBoardEdit);
-$('#boardList').on('click', '.boardDeleteIcon', deleteBoard);
-$('#boardList').on('keydown', 'input.form-control', updateBoardDetail);
-$('#boardList').on('focusout', 'input.form-control', hideBoardEditForm);
-$('#boardList').on('click', 'a', showBoardDetails);
-
 function showBoardDetails(event) {
   // console.log('In controller showBoardDetails');
   // console.log(event);
@@ -45,6 +38,7 @@ function updateBoardDetail(event) {
   } if (event.keyCode === 27) {
     boardsView.hideBoardEditForm(event.target.getAttribute('board-id'));
   }
+  return true;
 }
 
 
@@ -60,7 +54,7 @@ function makeSortable() {
       // console.log(this);
       const newOrder = [];
       const lis = this.getElementsByClassName('m_boardsBox');
-      for (let i = 0; i < lis.length; i++) {
+      for (let i = 0; i < lis.length; i += 1) {
         // console.log(lis[i]);
         newOrder.push((lis[i].getAttribute('board-id')));
       }
@@ -84,4 +78,11 @@ function render() {
     makeSortable();
   }
 }
+
+$('#boardList').on('click', '.boardEditIcon', showBoardEdit);
+$('#boardList').on('click', '.boardDeleteIcon', deleteBoard);
+$('#boardList').on('keydown', 'input.form-control', updateBoardDetail);
+$('#boardList').on('focusout', 'input.form-control', hideBoardEditForm);
+$('#boardList').on('click', 'a', showBoardDetails);
+
 store.subscribe(render);

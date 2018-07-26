@@ -1,25 +1,8 @@
 import nav from './view';
 import store from '../state';
 
-nav.showNavForBoardList();
-
-$('#trelloNavBar').on('click', '#createBoardBtn', createBoard);
-$('#trelloNavBar').on('keydown', '#createBoardInput', createBoardKey);
-$('#trelloNavBar').on('click', '#createListBtn', createList);
-$('#trelloNavBar').on('keydown', '#createListInput', createListKey);
-$('#trelloNavBar').on('click', '#myTrelloLogo', showBoardList);
-
-
 function showBoardList() {
   store.dispatch({ type: 'SHOW_BOARDS' });
-}
-
-function createBoardKey(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    createBoard();
-    return false;
-  }
 }
 
 function createBoard() {
@@ -29,12 +12,13 @@ function createBoard() {
   }
 }
 
-function createListKey(event) {
+function createBoardKey(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
-    createList();
+    createBoard();
     return false;
   }
+  return true;
 }
 
 function createList() {
@@ -42,6 +26,15 @@ function createList() {
   if (createListInput.value) {
     store.dispatch({ type: 'ADD_LIST', name: createListInput.value });
   }
+}
+
+function createListKey(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    createList();
+    return false;
+  }
+  return true;
 }
 
 function render() {
@@ -54,5 +47,13 @@ function render() {
     nav.showNavForBoardList();
   }
 }
+
+nav.showNavForBoardList();
+
+$('#trelloNavBar').on('click', '#createBoardBtn', createBoard);
+$('#trelloNavBar').on('keydown', '#createBoardInput', createBoardKey);
+$('#trelloNavBar').on('click', '#createListBtn', createList);
+$('#trelloNavBar').on('keydown', '#createListInput', createListKey);
+$('#trelloNavBar').on('click', '#myTrelloLogo', showBoardList);
 
 store.subscribe(render);

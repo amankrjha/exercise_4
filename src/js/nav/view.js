@@ -20,7 +20,7 @@ class NavHeader {
   }
 
   createBoardHeader(boardName) {
-    const board = this.createDOMElement(this.boardHeader = `<div class="col justify-content-center mb-3 mb-md-0" id="boardHeaderLabel">
+    const board = NavHeader.createDOMElement(this.boardHeader = `<div class="col justify-content-center mb-3 mb-md-0" id="boardHeaderLabel">
 <h4 class="navbar-brand" id="boardHeaderName">${boardName}</h4>
 </div>`);
     return board;
@@ -34,18 +34,18 @@ class NavHeader {
 
   showNavForBoardList() {
     this.parent.innerHTML = '';
-    this.parent.appendChild(this.createDOMElement(this.trelloLogo));
-    const headerForm = this.createDOMElement(this.headerForm)
-      .appendChild(this.createDOMElement(this.addBoardForm));
+    this.parent.appendChild(NavHeader.createDOMElement(this.trelloLogo));
+    const headerForm = NavHeader.createDOMElement(this.headerForm)
+      .appendChild(NavHeader.createDOMElement(this.addBoardForm));
     this.parent.appendChild(headerForm);
   }
 
   showNavForBoardDetails(boardName) {
     this.parent.innerHTML = '';
-    this.parent.appendChild(this.createDOMElement(this.trelloLogo));
+    this.parent.appendChild(NavHeader.createDOMElement(this.trelloLogo));
     this.parent.appendChild(this.createBoardHeader(boardName));
-    const headerForm = this.createDOMElement(this.headerForm)
-      .appendChild(this.createDOMElement(this.addListForm));
+    const headerForm = NavHeader.createDOMElement(this.headerForm)
+      .appendChild(NavHeader.createDOMElement(this.addListForm));
     this.parent.appendChild(headerForm);
   }
 }
